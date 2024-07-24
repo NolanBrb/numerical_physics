@@ -185,15 +185,4 @@ def main():
 
 
 if __name__ == "__main__":
-    import json
-    import sys
-    from unittest.mock import patch
-
-    with open("save_parms.json") as jsonFile:
-        save_parms = json.load(jsonFile)
-        sim_path = join(save_parms["base_folder"], save_parms["sim"])
-
-    args = ["prog", sim_path, "2", "50", "31", "31"]
-
-    with patch.object(sys, "argv", args):
-        main()
+    main()
