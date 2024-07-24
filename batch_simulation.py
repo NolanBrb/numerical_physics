@@ -1,12 +1,10 @@
 import numpy as np
 import scipy.sparse as sp
-import tkinter as tk
 import pandas as pd
 import argparse
 
 from os import makedirs, remove
 from os.path import join
-from tkinter import messagebox
 from shutil import rmtree
 from tqdm import tqdm
 
@@ -136,14 +134,6 @@ def main():
     try:
         makedirs(save_path)
     except FileExistsError:
-        root = tk.Tk()
-        root.withdraw()  # Hide the main window
-        # Display a yes/no messagebox
-        result = messagebox.askyesno(
-            "Folder already exists", "Folder already exists; overwrite ?"
-        )
-        if not result:
-            raise (FileExistsError("Folder already exists; not overwriting"))
         rmtree(save_path)
         makedirs(save_path)
 
