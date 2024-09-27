@@ -104,8 +104,13 @@ def main():
         y_ = inRange.multiply(ds.y)
         th_ = inRange.multiply(ds.theta)
 
-        def remove_diagonal(mat):
-            return mat - sp.diags(mat.diagonal())
+        def remove_diagonal(_mat):
+            mat = _mat.copy()
+            # TEMP FIX to avoid zeros to be removed during substraction
+            mat.data += 1
+            mat = mat - sp.diags(mat.diagonal())
+            mat.data += -1
+            return mat
 
         x_ = remove_diagonal(x_)
         y_ = remove_diagonal(y_)
