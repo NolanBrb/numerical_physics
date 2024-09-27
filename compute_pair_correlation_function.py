@@ -130,7 +130,10 @@ def main():
         yij.data += L * y_bound_minus
 
         # Compute orientation difference in [0, 2*pi] range
-        thij = th_ - th_.T
+        # Workaround to avoid the case where theta_i = theta_j
+        thij = th_.copy()
+        data = th_.data - sp.csr_matrix(th_.T).data
+        thij.data = data
         thij.data = np.where(thij.data < 0, 2 * np.pi + thij.data, thij.data)
 
         # Particle-particle distance for interacting particles
